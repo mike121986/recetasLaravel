@@ -17,6 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'titulo',
         'name',
         'email',
         'password',
@@ -41,4 +42,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //relacion de uno a muchos de usaurios a Recetas
+    public function recetas(){
+        return $this->hasMany(Receta::class);
+    }
 }
