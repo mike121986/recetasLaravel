@@ -24,5 +24,8 @@ Route::get('/recetas',[RecetaController::class, 'index'])->name('receta.index');
 Route::get('/recetas/create',[RecetaController::class, 'create'])->name('receta.create');
 Route::post('/recetas',[RecetaController::class , 'store'])->name('receta.store');
 Route::get('/recetas/{receta}',[RecetaController::class , 'show'])->name('receta.show');
+Route::get('/recetas/{receta}/edit', [RecetaController::class, 'edit'])->name('receta.edit');
+Route::put('/recetas/{receta}', [RecetaController::class, 'update'])->name('receta.update');
+Route::delete('/recetas/{receta}', [RecetaController::class, 'destroy'])->name('receta.destroy');
 
 Auth::routes();
