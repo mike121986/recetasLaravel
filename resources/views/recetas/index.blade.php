@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('botones')
-    <a href="{{route('receta.create')}}" class="btn btn-primary mr-2"> Crear Receta</a>
+@include('ui.navegacion')
 @endsection
 @section('content')
 
@@ -20,14 +20,17 @@
                         <td>{{$receta->titulo}}</td>
                         <td>{{$receta->categoria->nombre}}</td>
                         <td>
-                           
-                            <a href="{{ route('receta.edit',['receta'=>$receta->id])}}" class="btn btn-dark mr-1">Editar</a>
-                            <a href="{{ route('receta.show',['receta'=>$receta->id])}}" class="btn btn-success mr-1">Ver</a>
+                           <eliminar-receta receta-id="{{$receta->id}}"></eliminar-receta>
+                            <a href="{{ route('receta.edit',['receta'=>$receta->id])}}" class="btn btn-dark  d-block mb-2 mr-1">Editar</a>
+                            <a href="{{ route('receta.show',['receta'=>$receta->id])}}" class="btn btn-success  d-block  mr-1">Ver</a>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        <div class="col-12 mt-4 justify-content-center d-flex">
+            {{$recetas->links()}}
+        </div>
     </div>
 
 @endsection

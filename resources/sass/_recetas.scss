@@ -4,6 +4,8 @@ body{
 
 trix-editor{
     min-height: 400px;
+    overflow: hidden;
+    overflow-y: auto;
 }
 
 .bg-primary .navbar-brand{
@@ -13,4 +15,8 @@ trix-editor{
     &:hover{
         color:$blanco;
     }
+}
+
+.icono{
+    width: 36px;
 }

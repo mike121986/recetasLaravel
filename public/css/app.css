@@ -10008,6 +10008,8 @@ body {
 
 trix-editor {
   min-height: 400px;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .bg-primary .navbar-brand {
@@ -10017,4 +10019,8 @@ trix-editor {
 }
 .bg-primary .navbar-brand:hover {
   color: #ffffff;
+}
+
+.icono {
+  width: 36px;
 }

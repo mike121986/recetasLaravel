@@ -15,18 +15,24 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+
+        $user = User::create([
             'name' => 'Juan',
             'email' => 'correo@correo.com',
             'password' => Hash::make('12345678'),
             'url' => 'http://codigoconjuan.com',
         ]);
 
-        User::create([
-            'name' => 'Pablo',
+      
+
+        $user2 = User::create([
+            'name' => 'mikol',
             'email' => 'correo2@correo.com',
             'password' => Hash::make('12345678'),
-            'url' => 'http://codigoconjuan.com',
+            'url' => 'http://ticdwem.com',
         ]);
+
+        
+       
     }
 }
