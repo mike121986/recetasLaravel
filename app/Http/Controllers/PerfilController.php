@@ -53,7 +53,7 @@ class PerfilController extends Controller
     public function show(Perfil $perfil)
     {
         //obtener las recetas con paginacion
-        $recetas = Receta::where('user_id', $perfil->user_id)->paginate(3);
+        $recetas = Receta::where('user_id', $perfil->user_id)->paginate(10);
         return view('perfil.show')->with('perfil', $perfil)
                                   ->with('receta',$recetas);
     }

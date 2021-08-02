@@ -33,4 +33,21 @@
         </div>
     </div>
 
+    <h2 class="text-center my-5">RECETAS QUE TE GUSTARON</h2>
+    <div class="col-md-10 mx-auto bg-white p-3">
+        @if (count($usuario->meGusta) > 0)
+            
+        @else
+            <p class="text-center"> Aún no tienes recetas guardadas <small>Dale me gusta a las recetas y apareceran aqui</small></p>
+        @endif
+        <ul class="list-group">
+            @foreach ($usuario->meGusta as $receta)
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <p>{{$receta->titulo}}</p>
+                    <a class="btn btn-outline-success" href="{{ route('receta.show',['receta'=>$receta->id])}}"> VER </a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+
 @endsection

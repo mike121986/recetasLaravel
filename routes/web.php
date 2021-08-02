@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InicioController;
+use App\Http\Controllers\LikesController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\RecetaController;
 
@@ -17,9 +19,7 @@ use App\Http\Controllers\RecetaController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [InicioController::class, 'index'])->name('inicio.index');
 
 // recetas
 Route::get('/recetas',[RecetaController::class, 'index'])->name('receta.index');
@@ -34,5 +34,8 @@ Route::delete('/recetas/{receta}', [RecetaController::class, 'destroy'])->name('
 Route::get('perfiles/{perfil}',[PerfilController::class, 'show'])->name('perfiles.show');
 Route::get('perfiles/{perfil}/edit', [PerfilController::class, 'edit'])->name('perfil.edit');
 Route::put('/perfiles/{perfil}', [PerfilController::class, 'update'])->name('perfil.update');
+
+// almacena los likes de las recetas
+Route::post('/recetas/{receta}',[LikesController::class , 'update'])->name('likes.update');
 
 Auth::routes();

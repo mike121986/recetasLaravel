@@ -24,13 +24,17 @@ class RecetaController extends Controller
      */
     public function index()
     {
-        $usuario = auth()->user()->id;
+
+        $usuario = auth()->user();
+
         /* auth()->user()->recetas->dd(); */
-// recetas sin paginacion
+        // recetas sin paginacion
         /* $recetas = auth()->user()->recetas; */
+
         //recetas con paginacion
-        $recetas = Receta::where('user_id',$usuario)->paginate(5);
-        return view('recetas.index')->with('recetas', $recetas);
+        $recetas = Receta::where('user_id', $usuario->id)->paginate(10);
+        return view('recetas.index')->with('recetas', $recetas)
+                                    ->with('usuario', $usuario);
     }
 
     /**
@@ -100,7 +104,14 @@ class RecetaController extends Controller
      */
     public function show(Receta $receta)
     {
-        return view('recetas.show')->with('receta', $receta);
+        // obtener si el usuario actual y esta autenticado
+        $like = ( auth()->user()) ? auth()->user()->meGusta->contains($receta->id): false;
+
+        // pasa la cantidad de likes a la vista
+        $likes = $receta->likes->count();
+        return view('recetas.show')->with('receta', $receta)
+                                   ->with('like', $like)
+                                   ->with('likes',$likes);
     }
 
     /**
@@ -127,7 +138,7 @@ class RecetaController extends Controller
     public function update(Request $request, Receta $receta)
     {
         //reivsa el pilicy
-        $this->authorize('update',$receta);
+        $this->authorize('update', $receta);
 
         // validación
         $data = $request->validate([
@@ -168,8 +179,8 @@ class RecetaController extends Controller
      */
     public function destroy(Receta $receta)
     {
-        
-        $this->authorize('delete',$receta); 
+
+        $this->authorize('delete', $receta);
         $receta->delete();
         return redirect()->route('receta.index');
     }

@@ -27,4 +27,9 @@ class Receta extends Model
         donde debe buscar las realciones */
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    // likes que ha recibido un areceta
+    public function likes(){
+        return $this->belongsToMany(User::class, 'likes_receta');
+    }
 }

@@ -29,23 +29,24 @@
     <div class="container">
         <div class="row mx-auto bg-white p-4">
             @if (count($receta) > 0)
-                @foreach ($receta as $receta)
+                @foreach ($receta as $recetas)
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            <img src="/storage/{{$receta->imagen}}" class="card-img-top" alt="imagen receta">
+                            <img src="/storage/{{$recetas->imagen}}" class="card-img-top" alt="imagen receta">
                             <div class="card-body">
-                                <h3>{{$receta->titulo}}</h3>
-                                <a href="{{route('receta.show', ['receta'=>$receta->id])}}" class="btn btn-primary d-block mt-4 text-uppercase font-weight-bold">Ver Receta</a>
+                                <h3>{{$recetas->titulo}}</h3>
+                                <a href="{{route('receta.show', ['receta'=>$recetas->id])}}" class="btn btn-primary d-block mt-4 text-uppercase font-weight-bold">Ver Receta</a>
                             </div>                                
                         </div>
                     </div>
                 @endforeach
-                <div class="d-flex justify-content-center">
-                    {{$receta->links()}}
-                </div>
+                
             @else
                 <p class="text-center w-100">No hay Aún recetas...</p>
             @endif
+        </div>
+        <div class="d-flex justify-content-center">
+            {{$receta->links()}}
         </div>
     </div>
 @endsection
