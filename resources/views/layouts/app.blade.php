@@ -16,6 +16,10 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    {{-- /////////////////////==============================================================================/////////////// --}}
+    {{-- AQUI VAMOS A AGREGAR UN YIELD PARA ESTAR CARGNDO LIBRERIAS CSS SOLO DONDE SON NECESARIAS --}}
+    @yield('styles')
+    {{-- /////////////////////==============================================================================/////////////// --}}
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -85,5 +89,9 @@
             </div>
         </div>
     </div>
+    {{-- /////////////////////==============================================================================/////////////// --}}
+    {{-- AQUI VAMOS A AGREGAR UN YIELD PARA ESTAR CARGNDO LIBRERIAS JAVASCRIPT SOLO DONDE SON NECESARIAS --}}
+    @yield('scripts')
+    {{-- /////////////////////==============================================================================/////////////// --}}
 </body>
 </html>
