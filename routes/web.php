@@ -30,6 +30,10 @@ Route::get('/recetas/create',[RecetaController::class,'create'])->name('recetas.
 Route::post('/recetas',[RecetaController::class,'store'])->name('recetas.store');
 // este route nos lleva a el controlador en un show
 Route::get('/recetas/{receta}',[RecetaController::class,'show'])->name('recetas.show');
+// este route nos llevara a editar una receta
+Route::get('/recetas/{receta}/edit',[RecetaController::class,'edit'])->name('recetas.edit');
+// este Route nos manada al apartado donde se llevara la logica para el guardado de la receta que se esta editnado
+Route::put('/recetas/{receta}',[RecetaController::class,'update'])->name('recetas.update');
 Auth::routes();
 
 /* Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); */

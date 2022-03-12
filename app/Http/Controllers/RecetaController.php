@@ -69,7 +69,7 @@ class RecetaController extends Controller
             'categoria'=>'required',
             'preparacion'=>'required',
             'ingredientes'=>'required',
-            //'imagen'=>'required|image'
+            'imagen'=>'required|image'
         ]);
         $rutaImagen = $request['imagen']->store('upload-recetas','public');
 
@@ -125,7 +125,11 @@ class RecetaController extends Controller
      */
     public function edit(Receta $receta)
     {
-        //
+        /* $categorias trae unicamente los datos de la relacion entre recetas y categoria recetas
+            -- para traer los datos requeridos laravel a colocado una instancia de la tabla recetas , envia una instancia de objeto y 
+                una varoable que contienme todos los objetos */
+        $categorias = CategoriaReceta::all(['id','nombre']);
+        return view('recetas.edit',compact('categorias','receta'));
     }
 
     /**
@@ -137,7 +141,38 @@ class RecetaController extends Controller
      */
     public function update(Request $request, Receta $receta)
     {
-        //
+        /* revisa el pólicy */
+        $this->authorize('update',$receta);
+         /* ingresar datos a la bd sin modelo o sea en forma directa */
+         $data = request()->validate([
+            'titulo'=> 'required|min:6',
+            'categoria'=>'required',
+            'preparacion'=>'required',
+            'ingredientes'=>'required'
+        ]);
+
+        /* asignamos los valores o reescribimos los valores */
+        $receta->titulo = $data['titulo'];
+        $receta->categoria_id = $data['categoria'];
+        $receta->preparacion = $data['preparacion'];
+        $receta->ingredientes = $data['ingredientes'];
+        $receta->titulo = $data['titulo'];
+
+        // si el usuario sube una nueva imagen
+        if(request('imagen')){
+            $rutaImagen = $request['imagen']->store('upload-recetas','public');
+
+            // resize de la imagen con intervetion image
+            $img=Image::make(public_path("storage/{$rutaImagen}"))->fit(1000,550);
+            $img ->save();
+
+            /* asignamos al objeto */
+            $receta->imagen = $rutaImagen;
+        }
+        $receta->save();
+
+        // retideccionar
+        return redirect()->action([RecetaController::class,'index']);
     }
 
     /**
