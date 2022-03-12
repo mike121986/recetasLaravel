@@ -28,6 +28,8 @@ Route::get('/recetas',[RecetaController::class,'index'])->name('recetas.index');
 Route::get('/recetas/create',[RecetaController::class,'create'])->name('recetas.create');
 // este route nos lleva a el controller y es un store
 Route::post('/recetas',[RecetaController::class,'store'])->name('recetas.store');
+// este route nos lleva a el controlador en un show
+Route::get('/recetas/{receta}',[RecetaController::class,'show'])->name('recetas.show');
 Auth::routes();
 
 /* Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); */

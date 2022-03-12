@@ -12,10 +12,12 @@ use Intervention\Image\Facades\Image;
 
 class RecetaController extends Controller
 {
-    /* se eejcuta primero el constructor y este verifica que todo lo que quiere entrar aqui debe estar autenticado */
+    /* se eejcuta primero el constructor y este verifica que todo lo que quiere entrar aqui debe estar autenticado 
+       como segundo parametro le podemos pasar una exepcion para que un metodo no necesite autent8icacions*/
     public function __construct()
     {
-        $this->middleware('auth');
+
+        $this->middleware('auth',['except'=>'show']);
     }
     /**
      * Display a listing of the resource.
@@ -112,7 +114,7 @@ class RecetaController extends Controller
      */
     public function show(Receta $receta)
     {
-        //
+        return view('recetas.show',compact('receta'));
     }
 
     /**

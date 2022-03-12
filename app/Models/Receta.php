@@ -22,4 +22,11 @@ class Receta extends Model
         /* esta es una relacion inversa */
         return $this->belongsTo(CategoriaReceta::class);
     }
+
+    /* obtiene la informacion del usaurio via foreign key */
+    public function autor(){
+        /* CUANDO HACMOS ALGUNA PRUEBA DE CONEXION CON TIKER Y NO FUNCION AL RELACION, DEBEMOS PASAR COMO SEGUNDO 
+        PARAMETRO EL CAMPO QUE ESTA RELACIONADO CON LA OTRA TABLA  */
+        return $this->belongsTo(User::class,'user_id');
+    }
 }
